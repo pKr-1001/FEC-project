@@ -72,6 +72,26 @@ app.post('/mugs', async (req, res) => {
     }
 })
 
+app.delete('/mugs/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        const data = await pool.query(
+            `DELETE FROM mugs
+            WHERE mug_id = $1`,
+            [id]
+        )
+        
+        if (data.rowCount > 0) {
+            res.status(200).json({ message: 'Resource deleted successfully' });
+        } else {
+            res.status(404).json({ message: 'Resource not found' });
+        }
+    }
+    catch (err) {
+        console.error(err);
+    }
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
