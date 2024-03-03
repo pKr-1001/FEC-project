@@ -41,7 +41,7 @@ app.get('/mugs', async (req, res) => {
 
 app.get('/mugs/:id', async (req, res) => {
     //TODO edge cases for id
-    const id = req.params.id;
+    const id = Number.parseInt(req.params.id);
     try {
         const data = await pool.query(
             `SELECT * FROM mugs
@@ -72,15 +72,42 @@ app.post('/mugs', async (req, res) => {
     }
 })
 
+app.patch('/mugs/:id', async (req, res) => {
+    const id = Number.parseInt(req.params.id);
+    const {
+        mug_name,
+        mug_description_1,
+        mug_description_2,
+        mug_shipping, 
+        mug_cost
+    } = req.body;
+    try {
+        const data = pool.query(
+            `UPDATE mugs SET
+            mug_name = COALESCE($2, mug_name), 
+            mug_description_1 = COALESCE($3, mug_description_1),
+            mug_description_2 = COALESCE($4, mug_description_2), 
+            mug_shipping = COALESCE($5, mug_shipping), 
+            mug_cost = COALESCE($6, mug_cost)`,
+            [id, mug_name, mug_description_1, mug_description_2, mug_shipping, mug_cost]
+        )
+        console.log("Results of patch request: ", data.rows[0]);
+        res.json(data.rows[0]);
+    }
+    catch(err){
+        console.error(err);
+    }
+})
+
 app.delete('/mugs/:id', async (req, res) => {
-    const id = req.params.id;
+    const id = Number.parseInt(req.params.id);
     try {
         const data = await pool.query(
             `DELETE FROM mugs
             WHERE mug_id = $1`,
             [id]
         )
-        
+
         if (data.rowCount > 0) {
             res.status(200).json({ message: 'Resource deleted successfully' });
         } else {
