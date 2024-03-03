@@ -26,6 +26,7 @@ app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Homepage');
+    res.sendStatus(500);
 });
 
 app.get('/mugs', async (req, res) => {
@@ -36,6 +37,7 @@ app.get('/mugs', async (req, res) => {
     }
     catch(err){
         console.error(err);
+        res.sendStatus(500);
     }
 })
 
@@ -53,6 +55,7 @@ app.get('/mugs/:id', async (req, res) => {
     }
     catch (err) {
         console.error(err);
+        res.sendStatus(500);
     }
 })
 
@@ -69,6 +72,7 @@ app.post('/mugs', async (req, res) => {
     }
     catch (err) {
         console.error(err);
+        res.sendStatus(500);
     }
 })
 
@@ -82,20 +86,22 @@ app.patch('/mugs/:id', async (req, res) => {
         mug_cost
     } = req.body;
     try {
-        const data = pool.query(
+        const data = await pool.query(
             `UPDATE mugs SET
-            mug_name = COALESCE($2, mug_name), 
-            mug_description_1 = COALESCE($3, mug_description_1),
-            mug_description_2 = COALESCE($4, mug_description_2), 
-            mug_shipping = COALESCE($5, mug_shipping), 
-            mug_cost = COALESCE($6, mug_cost)`,
-            [id, mug_name, mug_description_1, mug_description_2, mug_shipping, mug_cost]
-        )
+            mug_name = COALESCE($1, mug_name), 
+            mug_description_1 = COALESCE($2, mug_description_1),
+            mug_description_2 = COALESCE($3, mug_description_2), 
+            mug_shipping = COALESCE($4, mug_shipping), 
+            mug_cost = COALESCE($5, mug_cost) WHERE
+            mug_id = $6 RETURNING *`,
+            [mug_name, mug_description_1, mug_description_2, mug_shipping, mug_cost, id]
+        );
         console.log("Results of patch request: ", data.rows[0]);
         res.json(data.rows[0]);
     }
     catch(err){
         console.error(err);
+        res.sendStatus(500);
     }
 })
 
@@ -116,6 +122,7 @@ app.delete('/mugs/:id', async (req, res) => {
     }
     catch (err) {
         console.error(err);
+        res.sendStatus(500);
     }
 })
 
