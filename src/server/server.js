@@ -126,6 +126,35 @@ app.delete('/mugs/:id', async (req, res) => {
     }
 })
 
+app.get('/mug_pics', async (req, res) => {
+    try {
+        const data = await pool.query('SELECT * FROM mug_pics');
+        console.log("Get all from mug_pics: ", data.rows);
+        res.json(data.rows);
+    }
+    catch(err){
+        console.error(err);
+        res.sendStatus(500);
+    }
+})
+
+app.get('/mug_pics/:id', async (req, res) => {
+    try {
+        const id = Number.parseInt(req.params.id);
+        const data = await pool.query(
+            `SELECT * FROM mug_pics WHERE
+            mug_id = $1`, 
+            [id]
+        );
+        console.log(`Get one from mug_pics where mug_id = ${id}:`, data.rows[0]);
+        res.json(data.rows[0]);
+    }
+    catch(err){
+        console.error(err);
+        res.sendStatus(500);
+    }
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
