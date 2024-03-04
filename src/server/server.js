@@ -1,8 +1,6 @@
 import express from 'express';
-import pg from 'pg';
-import dotenv from 'dotenv';
+
 import cors from 'cors';
-import pool from './pool.js';
 import mugRoutes from './mugRoutes.js';
 import mugPicsRoutes from './mugPicsRoutes.js';
 
