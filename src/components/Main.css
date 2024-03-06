@@ -55,3 +55,27 @@
     position: absolute;
     /* Add other styles to match the Tailwind appearance */
   }
+
+  .image-container {
+    position: relative; /* This makes it a positioning context for absolutely positioned elements inside it */
+    display: inline-block; 
+  }
+  
+  .image-container .nav-button {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%);
+    display: none; /* Hide buttons by default */
+  }
+  
+  .image-container:hover .nav-button {
+    display: block; /* Show buttons on hover */
+  }
+  
+  .image-container .nav-button:first-child {
+    left: 0; /* Position the 'previous' button to the left */
+  }
+  
+  .image-container .nav-button:last-child {
+    right: 0; /* Position the 'next' button to the right */
+  }
