@@ -4,24 +4,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
 
 // Main Component 
+// Main Component 
 const Main = () => {
 
-   // images array containing the images we will display
-    const images = ["https://res.cloudinary.com/hbhhv9rz9/image/upload/f_auto,c_limit,w_3840,q_auto/Merch PDPs/Fellow Carter Move 12oz Fog Grey/test_Fellow-Carter-Move-12oz-M1-Hero.png", 
-    'https://res.cloudinary.com/hbhhv9rz9/image/upload/f_auto,c_limit,w_3840,q_auto/Merch PDPs/Fellow Carter Move 12oz Fog Grey/test_Fellow-Carter-Move-12oz-M1-Detail1.png']
-
-    const [currentQuantity, setCurrentQuantity] = useState(1) // Create and set the initial state for the current quantity
-    const [currentPrice, setCurrentPrice] = useState(36); // Create and set the initial state for the current price 
-    const [mugData, setMugData] = useState({}); // Create and set the initial state for the mug data
-    const [activeIndex, setActiveIndex] = useState(0); // Tracks the active slide index
-    
-  
-    // Fetch data when the component mounts
-    useEffect(() => {
-      fetch("https://fec-project-tjyl.onrender.com/mugs/1")  // Fetch data from endpoint
+  // Fetch function that fetches a mug with a specific id 
+  const fetchMugs = () => {
+    return fetch("https://fec-project-tjyl.onrender.com/mugs/1")  // Fetch data from endpoint
       .then((response) => response.json()) // if fetch was successful, then respond with json formatted data
       .then((data) => { // And return an object with key/value pairs. The values being the data. 
-        setMugData({
+        return {
           mugName: data.mug_name,
           mugDescription1: data.mug_description_1,
           mugDescription2: data.mug_description_2,
@@ -32,16 +23,34 @@ const Main = () => {
         console.error("Error fetching mugs:", error); // Log out error 
         throw error; // throw error
       }); 
+  };
+
+   // images array containing the images we will display
+    const images = ["https://res.cloudinary.com/hbhhv9rz9/image/upload/f_auto,c_limit,w_3840,q_auto/Merch PDPs/Fellow Carter Move 12oz Fog Grey/test_Fellow-Carter-Move-12oz-M1-Hero.png", 
+    'https://res.cloudinary.com/hbhhv9rz9/image/upload/f_auto,c_limit,w_3840,q_auto/Merch PDPs/Fellow Carter Move 12oz Fog Grey/test_Fellow-Carter-Move-12oz-M1-Detail1.png']
+
+    const [currentPic, setCurrentPic] = useState(images[0]); // Create and set the initial state for the current picture
+    const [currentQuantity, setCurrentQuantity] = useState(1) // Create and set the initial state for the current quantity
+    const [currentPrice, setCurrentPrice] = useState(36); // Create and set the initial state for the current price 
+    const [showFirstButton, setShowFirstButton] = useState(false); // Create and set the initial state for the first button 
+    const [mugData, setMugData] = useState({}); // Create and set the initial state for the mug data
+  
+    // Fetch data when the component mounts
+    useEffect(() => {
+      fetchMugs().then(setMugData).catch(console.error); // Invoke fetchMugs, attain the returned data, and pass the data to setMugData.
     }, []);
 
-    // Directly set activeIndex for navigation
-    const goToFirstSlide = () => {
-      setActiveIndex(0); // Always go to the first slide
-    };
+    // Function to display first pic
+    const firstPic = () => { 
+        setCurrentPic(images[0]); // Set the current picture to the first element in the images array
+        setShowFirstButton(false); // Hide the first button and show the second
+    }
 
-    const goToSecondSlide = () => {
-      setActiveIndex(1); // Always go to the second slide
-    };
+    // Function to display second pic
+    const secondPic = () => {
+        setCurrentPic(images[1]); // Set the current picture to the second element in the images array
+        setShowFirstButton(true); // Show the first button and hide the second
+    }
 
     // Function to increase quantity 
     const increaseQuantity = () => {
@@ -70,24 +79,13 @@ return (
 <>
 <div className="main-component">
     <div className='row'>
-    <div className='col-sm-8'>
-    <div className="carousel-container">
-        <Carousel activeIndex={activeIndex} onSelect={(selectedIndex, e) => setActiveIndex(selectedIndex)} indicators={false}>
-            {images.map((image, index) => (
-                <Carousel.Item key={index}>
-                    <img
-                        className="d-block w-100"
-                        src={image}
-                        alt={`Slide ${index}`}
-                    />
-                </Carousel.Item>
-            ))}
-        </Carousel>
-        {activeIndex === 1 && <button className="nav-button prev" onClick={goToFirstSlide}>{'<---'}</button>}
-        {activeIndex === 0 && <button className="nav-button next" onClick={goToSecondSlide}>{'--->'}</button>}
-    </div>
-    
-    </div>
+      <div className='carousel col-sm-8'>
+        <div className="image-container"> {/* Add this wrapper */}
+          {showFirstButton && <button className="nav-button" onClick={firstPic}>{'<---'}</button>}
+          <img src={currentPic} alt="coffee" height="100px" width="100px"/>
+          {!showFirstButton && <button className="nav-button" onClick={secondPic}>{'--->'}</button>}
+        </div>
+      </div>
         <div className='product-info col-sm-4'>
             <br/><br/><br/><br/><br/>
             <h1>{mugData.mugName}</h1>
