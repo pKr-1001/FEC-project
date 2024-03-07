@@ -72,7 +72,7 @@ return (
     <div className='row'>
     <div className='col-sm-8'>
     <div className="carousel-container">
-        <Carousel activeIndex={activeIndex} onSelect={(selectedIndex, e) => setActiveIndex(selectedIndex)}>
+        <Carousel activeIndex={activeIndex} onSelect={(selectedIndex, e) => setActiveIndex(selectedIndex)} indicators={false}>
             {images.map((image, index) => (
                 <Carousel.Item key={index}>
                     <img
@@ -86,8 +86,10 @@ return (
         {activeIndex === 1 && <button className="nav-button prev" onClick={goToFirstSlide}>{'<---'}</button>}
         {activeIndex === 0 && <button className="nav-button next" onClick={goToSecondSlide}>{'--->'}</button>}
     </div>
+    
     </div>
         <div className='product-info col-sm-4'>
+            <br/><br/><br/><br/><br/>
             <h1>{mugData.mugName}</h1>
             <p>{mugData.mugDescription1}</p>
             <p>{mugData.mugDescription2}</p>
