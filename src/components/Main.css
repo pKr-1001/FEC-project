@@ -11,9 +11,9 @@
   
   .carousel img {
     width: 100%;
-    max-width: 640px; /* Adjust based on your needs */
+    max-width: 640px; 
     height: auto;
-    border-radius: 8px; /* Bootstrap-style rounded corners */
+    border-radius: 8px; 
   }
 
   .main-component {
@@ -56,26 +56,33 @@
     /* Add other styles to match the Tailwind appearance */
   }
 
-  .image-container {
-    position: relative; /* This makes it a positioning context for absolutely positioned elements inside it */
-    display: inline-block; 
-  }
-  
-  .image-container .nav-button {
+  .carousel-container {
+    position: relative;
+}
+
+.nav-button {
     position: absolute;
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%);
+    top: 50%;
+    z-index: 100; /* Ensure buttons are above the carousel images */
+    background-color: rgba(255,255,255,0.5); /* Optional: styling to make buttons stand out */
+    border: none; /* Optional: remove border */
+    cursor: pointer; /* Change cursor on hover over the button */
+    transform: translateY(-50%); /* Center vertically */
     display: none; /* Hide buttons by default */
-  }
-  
-  .image-container:hover .nav-button {
+}
+
+.carousel-container:hover .nav-button {
     display: block; /* Show buttons on hover */
-  }
-  
-  .image-container .nav-button:first-child {
-    left: 0; /* Position the 'previous' button to the left */
-  }
-  
-  .image-container .nav-button:last-child {
-    right: 0; /* Position the 'next' button to the right */
-  }
+}
+
+.nav-button.prev {
+    left: 10px; /* Adjust as needed to position it closer to the image from the left */
+}
+
+.nav-button.next {
+    right: 10px; /* Adjust as needed to position it closer to the image from the right */
+}
+
+.carousel-control-prev, .carousel-control-next {
+  display: none !important;
+}
