@@ -48,14 +48,10 @@ function App() {
             <Header flip={flip} menuIcon={menuIcon} toggle={toggle}/>
             {main}
             <Submain />
+            {/* <Footer /> */}
           </div>
         }/>
-        
-        
-        {/* <Main />  */}
-        {/* <Footer /> */}
       </Routes>
-        
     </>
   );
 }
