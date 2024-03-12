@@ -75,7 +75,7 @@ const Footer = () => {
                                 </li>
                                 <li className="py-25">
                                     <a href="/us/eng/blue-bottle-studio" target="_self" rel="" className="no-underline border-white w-fit cursor-pointer border-b border-opacity-0 hover:border-opacity-100 transition-color duration-300 active:border-opacity-100">
-                                        <span aria-hidden="false" className="font-sans tracking-widest uppercase text-white text-xs font-normal">Red Bottle Studio</span>
+                                        <span aria-hidden="false" className="font-sans tracking-widest uppercase text-white text-xs font-normal">Blue Bottle Studio</span>
                                     </a>
                                 </li>
                                 <li className="py-25">
@@ -124,7 +124,7 @@ const Footer = () => {
                         <label htmlFor="newsletterEmailInput">
                             <span aria-hidden="false" className="font-sans tracking-widest uppercase text-white text-sm xl:text-md font-normal text-sm2">Subscribe and Stay Updated</span>
                         </label>
-                        <p className="font-serif text-white text-sm py-4">Join our email newsletter for exclusive offers, Red Bottle news, events, and first access to our most exciting releases. Plus, get complimentary shipping on your first purchase when you sign up.</p>
+                        <p className="font-serif text-white text-sm py-4">Join our email newsletter for exclusive offers, Blue Bottle news, events, and first access to our most exciting releases. Plus, get complimentary shipping on your first purchase when you sign up.</p>
                         <div className="flex flex-row">
                             <input id="newsletterEmailInput" className="border-0 border-white py-2 px-0 w-full text-white bg-foot placeholder-white font-serif text-xs" type="email" autoComplete="email" inputMode="email" placeholder="enter your email address" value="" onChange={handleChange}/>
                                 {/* <button className="py-2" type="submit" aria-label="sign up" style={{backgroundColor:"rgb(47,50,53)"}}> */}
@@ -144,7 +144,7 @@ const Footer = () => {
                             <a href="https://www.facebook.com/bluebottlecoffee" rel="noreferrer" target="_blank">
                                 <div className="hover:opacity-70">
                                     <svg aria-labelledby="bbFacebook" fill="none" height="19" id="facebook-icon" viewBox="0 0 9 19" width="9" xmlns="http://www.w3.org/2000/svg">
-                                        <title id="bbFacebook">Go to Red Bottle Facebook</title>
+                                        <title id="bbFacebook">Go to Blue Bottle Facebook</title>
                                         <path fillRule="evenodd" clipRule="evenodd" d="M5.72072 6.19694V4.56934C5.72072 4.32435 5.73126 4.1352 5.75322 4.00099C5.7784 3.85949 5.83001 3.72431 5.9052 3.60287C5.99357 3.46619 6.12972 3.36947 6.28558 3.33266C6.46128 3.28402 6.69408 3.2588 6.98574 3.2588H8.5758V0H6.03434C4.56375 0 3.5078 0.357585 2.86651 1.07276C2.22433 1.78883 1.90368 2.84177 1.90368 4.23428V6.19784H0V9.45754H1.90368V18.9151H5.72072V9.45754H8.2613L8.59776 6.19694H5.72072Z" fill="white" fillOpacity="0.8"></path>
                                     </svg>
                                 </div>
@@ -232,7 +232,7 @@ const Footer = () => {
                             </li>
                         </ul>
                     </div>
-                    <span aria-hidden="false" className="font-sans tracking-widest uppercase text-white text-xs flex text-center font-normal text-line2">© 2024 RED BOTTLE COFFEE Inc., All Rights Reserved</span>
+                    <span aria-hidden="false" className="font-sans tracking-widest uppercase text-white text-xs flex text-center font-normal text-line2">© 2024 BLUE BOTTLE COFFEE Inc., All Rights Reserved</span>
                 </div>
         </div>
     </footer>

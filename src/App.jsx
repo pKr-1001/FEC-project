@@ -6,6 +6,9 @@ import Main from "./components/Main";
 import Submain from "./components/Submain";
 import Footer from "./components/Footer";
 import HeaderExpanded from "./components/HeaderExpanded";
+import { ImageProvider } from "./components/imageContext";
+
+export let ContextHeader = React.createContext();
 
 export let ContextHeader = React.createContext();
 
@@ -16,7 +19,7 @@ function App() {
     const [size, setSize] = useState({ width: window.innerWidth})
     const [toggle, setToggle] = useState(false)
 
-    const main = expanded ? <HeaderExpanded/> : <Main/>
+    const main = expanded ? <HeaderExpanded/> : <ImageProvider><Main/></ImageProvider>
 
     const flip = () => {
         setExpanded(!expanded)
@@ -56,7 +59,9 @@ function App() {
               <Header flip={flip} menuIcon={menuIcon} toggle={toggle}/>
               {main}
             </ContextHeader.Provider>
-            <Submain />
+            <ImageProvider>
+              <Submain />
+            </ImageProvider>
             <Footer />
           </div>
         }/>

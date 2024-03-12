@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import './Submain.css';
-import pic from '../assets/fellowMugExtra2.webp';
+import { imageContext } from './imageContext';
+
 
 const Submain = () => {
-
+    const imageArr = useContext(imageContext);
     const [mugData, setMugData] = useState({
         title: '',
         header1: '',
@@ -15,7 +16,7 @@ const Submain = () => {
     });
 
     useEffect(() => {
-        fetchMugs().then(setMugData).then(console.log(mugData)).catch(console.error);
+        fetchMugs().then(setMugData).catch(console.error);
     }, []);
 
     
@@ -40,7 +41,7 @@ const Submain = () => {
                 </div>
             </div>
             <div className='submain-pic-container'>
-                <img src={pic} alt='Fellow Mug pic' className='submain-pic'></img>
+                <img src={imageArr[2]} alt='Fellow Mug pic' className='submain-pic'></img>
             </div>
         </section>
     )

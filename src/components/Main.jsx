@@ -1,16 +1,16 @@
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useContext } from 'react';
 import './Main.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
-import pic1 from '../assets/fellowMugMain.webp';
-import pic2 from '../assets/fellowMugExtra.webp';
 
-// Main Component 
+import { imageContext } from './imageContext';
+
 // Main Component 
 const Main = () => {
+    const imageArr = useContext(imageContext);
 
    // images array containing the images we will display
-    const images = [pic1, pic2]
+    //const images = [pic1, pic2]
 
     const [currentQuantity, setCurrentQuantity] = useState(1) // Create and set the initial state for the current quantity
     const [currentPrice, setCurrentPrice] = useState(36); // Create and set the initial state for the current price 
@@ -76,7 +76,7 @@ return (
         <div className='col-sm-6'>
             <div className="carousel-container">
                 <Carousel activeIndex={activeIndex} onSelect={(selectedIndex, e) => setActiveIndex(selectedIndex)} indicators={false}>
-                    {images.map((image, index) => (
+                    {imageArr.map((image, index) => (
                         <Carousel.Item key={index}>
                             <img
                             className="d-block w-100"
